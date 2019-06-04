@@ -1,0 +1,121 @@
+<div class="card px-3">
+  <div class="card-body">
+
+
+
+    <div class="row dashboard-section my-2 py-3 nav-btns" *ngIf="loggedInUser.role > 0 ">
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/issue_q">
+            <i class="fa fa-print" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Issue Q</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/call_q">
+            <i class="fa fa-bell" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Call</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/assign_q">
+            <i class="fa fa-check-square" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Assign Q</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/check_q">
+            <i class="fa fa-search" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Check Q</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/profile_setup">
+            <i class="fa fa-user" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Profile Setup</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row dashboard-section my-2 py-3 nav-btns"  *ngIf="loggedInUser.role == 2 || loggedInUser.role == 1">
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/data_insight">
+            <i class="fa fa-bar-chart-o" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Data Insight</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/users">
+            <i class="fa fa-group" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Users</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/lines">
+            <i class="fa fa-bars" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Lines</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+          <div class="btn-nav">
+            <a class="btn btn-lg" routerLink="/dashboard/printers">
+              <i class="fa fa-print" style="font-size:3.5em; color:white"></i>
+              <span class="menu-title">Printers</span>
+            </a>
+          </div>
+        </div>
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/license_info">
+            <i class="fa-drivers-license" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">License Info</span>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/audit_logs">
+            <i class="fa fa-history" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Audit Logs</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row dashboard-section my-2 py-3 nav-btns"  *ngIf="loggedInUser.role == 1">
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2 ">
+        <div class="btn-nav">
+          <a class="btn btn-lg" routerLink="/dashboard/account_setup">
+            <i class="fa fa-gear" style="font-size:3.5em; color:white"></i>
+            <span class="menu-title">Settings</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div><!-- end of .card -->

@@ -1,0 +1,8 @@
+{
+    "apps" : [{
+      "name"       : "employer_portal",
+      "script"     : "server.js",
+      "instances"  : 4,
+      "exec_mode"  : "cluster"
+    }]
+}

@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card px-3">
+      <div class="card-body">
+        <h4 class="card-title">Add New Line</h4>
+        <form class="forms-sample" action="#" #lineForm="ngForm" (ngSubmit)="saveLine(lineForm)" method="POST">
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="line.name" placeholder="Name"
+                required #name="ngModel">
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+                Name is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="color" class="col-sm-3 col-form-label">Color</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control color-picker" id="color" name="color" [(ngModel)]="line.color"
+                data-mode="complex" value="#6bf178" required #color="ngModel" value="#f0f3bd">
+              <div *ngIf="color.invalid && (color.dirty || color.touched)" class="error-message">
+                Color is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="color" class="col-sm-3 col-form-label">Priority</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="priority"  min="0" name="priority" [(ngModel)]="line.priority"
+                required #priority="ngModel">
+              <div *ngIf="priority.invalid && (priority.dirty || priority.touched)" class="error-message">
+                Priority is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="color" class="col-sm-3 col-form-label">Desks</label>
+            <div class="col-sm-9">
+              <div class="form-group d-flex">
+                <input type="text" class="form-control todo-list-input" placeholder="Add New Desk">
+                <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task"><i class="fa fa-plus"
+                    style="font-size:1.2em; color:white"></i></button>
+              </div>
+
+              <div class="list-wrapper px-3">
+                <ul class="d-flex flex-column-reverse todo-list">
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="color" class="col-sm-3 col-form-label">Tags</label>
+            <div class="col-sm-9">
+              <div class="form-group d-flex">
+                <select id="tags" class="js-example-basic-multiple" name="tags[]" [(ngModel)]="tags"  multiple="multiple" style="width:100%">
+                  <option *ngFor="let tag of tags_list" value="{{ tag.name }}">{{ tag.name }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          
+            <div class="form-group">
+              <button type="submit" class="btn btn-miq-primary btn-md float-right btn-nav">
+                <i class="fa fa-save" style="font-size:2em; color:white"></i>
+                <span class="menu-title">Save</span>
+              </button>
+            </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

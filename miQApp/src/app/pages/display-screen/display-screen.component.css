@@ -1,0 +1,54 @@
+.line-grid {
+
+    text-align: center;
+    padding: 10px;
+}
+.now-calling-header {
+    padding: 10px;
+    color:red;
+}
+
+.line-grid h3 {
+    color:green;
+    text-decoration: blink;
+}
+
+.main-grid h3 {
+    background: #eee;
+    text-align: center;
+    padding: 10px;
+}
+.now-calling {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+.now-calling h4 {
+    color:green;
+    padding: 5px;
+    font-size: 2em;
+}
+.now-calling h5 {
+    padding: 5px;
+    font-size: 1.5em;
+}
+.missed {
+    text-align: center;
+    color:red;
+    display: block;
+}
+.scrolling {
+    padding:5px;
+}
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
+html {
+    background-color:#fff !important;
+}

@@ -1,0 +1,316 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h2 class="card-title">Call</h2>
+</div>
+    <div class="card px-3">
+
+      <div class="card-body">
+
+        <div class="row">
+
+          <div class="col-md-12">
+            <button class="btn btn-miq-primary btn-md my-1 btn-margin btn-rect btn-radious btn-nav" (click)="openLineModal()">
+              <i class="fa fa-caret-square-o-down" style="font-size:2em; color:white"></i>
+              <span style="display:block">{{line.name || 'Select Line'}}</span>
+            </button>
+            <button class="btn btn-miq-primary btn-md my-1 btn-margin btn-rect btn-radious btn-nav " (click)="openSelectCounterModal()">
+              <i class="fa fa-caret-square-o-down" style="font-size:2em; color:white"></i>
+              <span style="display:block">{{counter.name || 'Select Counter/ Room'}}</span>
+            </button>
+
+            <button class="btn btn-miq-primary btn-md my-1 btn-margin btn-rect btn-radious btn-nav" (click)="openWaitingListModal()">
+
+              <i class="fa fa-th-list" style="font-size:2em; color:white"></i>
+              <span style="display:block">Waiting List</span>
+            </button>
+
+            <div class="row my-5">
+              <div class="col-md-6 card ">
+                <div class="call-current">
+                  <div class="card-body text-center">
+                    <h3 class="card-title text-dark p-3 text-center">Current</h3>
+                    <div *ngIf="hasCurrent">
+                      <h6 class="text-center">{{currentLine}} # {{currentQueue.queue.id}}</h6>
+                      <h6 class="text-center">Q Number : {{this.helper.generateQueueNumber(currentQueue.queue.id)}}</h6>
+                      <h6 class="text-center">Name : {{currentQueue.queue.name}}</h6>
+                      <h6 class="text-center">Next Line : {{ currentQueue.next_line }} </h6>
+                      <h6 class="text-center"> &nbsp;</h6>
+
+                      <hr>
+
+                      <button class="btn btn-miq-primary btn-md my-1 btn-margin btn-square btn-nav" (click)="openTransferModal()">Transfer</button>
+                      <button class="btn btn-miq-primary btn-md my-1 btn-margin btn-square btn-nav" (click)="finishedQueue()">Finished</button>
+                    </div>
+
+                    <div *ngIf="!hasCurrent">
+                        <h6 class="text-center">empty</h6>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6  card ">
+                <div class="call-next">
+                  <div class="card-body text-center">
+                    <h3 class="card-title text-dark p-3 text-center">Next</h3>
+                    <div *ngIf="hasNext">
+                      <h6 class="text-center">{{nextLine}}#{{nextQueue.queue.id}}</h6>
+                      <h6 class="text-center">Q Number : {{this.helper.generateQueueNumber(nextQueue.queue.id)}}</h6>
+                      <h6 class="text-center">Name : {{nextQueue.queue.name}}</h6>
+                      <h6 class="text-center">Number of Call : {{nextQueue.call_number}}</h6>
+
+                      <hr>
+
+                      <button  [disabled]="disabledCall ? 'true' : null "   (click)="callQ(nextQueue)" class="btn btn-miq-primary btn-md my-1 btn-margin btn-square btn-nav">Call</button>
+                      <button *ngIf="nextQueue.call_number >=3" class="btn btn-miq-primary btn-md my-1 btn-margin btn-square btn-nav" (click)="goToQ(nextQueue.id)">Return to Q</button>
+                      <button *ngIf="nextQueue.call_number >=3 " class="btn btn-miq-primary btn-md my-1 btn-margin btn-square btn-nav" (click)="noShow()">No Show</button>
+                      <button [disabled]="currentQueue.id ? 'true' : null "  *ngIf="nextQueue.call_number > 0" class="btn btn-miq-primary btn-md my-1 btn-margin btn-square btn-nav" (click)="startServing()">Start
+                        Serving</button>
+
+                    </div>
+
+                    <div *ngIf="!hasNext">
+                        <h6 class="text-center">empty</h6>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- <div class="col-md-12 card bg-secondary my-2">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="p-3">
+                  <h3>Name : Jerry</h3>
+                  <h4>Q Number : 002</h4>
+                  <hr>
+                  <button class="btn btn-info btn-margin">Line 1</button>
+                  <button class="btn btn-success btn-margin">Line 4</button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="p-3 h-100" style="border-left:1px solid #ddd;">
+                  <button class="btn btn-primary btn-margin">Line 2</button>
+                  <button class="btn btn-danger btn-margin">Line 3</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+      </div>
+    </div><!-- end of .card -->
+
+    <!-- select counter modal-->
+    <div class="modal fade" id="chooseDesk" tabindex="-1" role="dialog" aria-labelledby="select counter" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="changePassword">Choose Counter</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body miq-modal-body">
+            <div class="list-wrapper q-card">
+              <ul class="d-flex flex-column todo-list todo-list-custom">
+
+                <li *ngFor="let desk of lineDesks">
+                  <div class="form-radio form-radio-flat">
+                    <label class="form-check-label">
+                      <input class="form-check-input"    name="queue" type="radio" (change)="changeCounter(desk)">
+                      {{desk.name}}
+                      <i class="input-helper"></i></label>
+                  </div>
+                </li>
+
+                <li *ngIf="lineDesks.length <= 0">
+                    <div>
+                      No desk to choose.
+                    </div>
+                </li>
+
+              </ul>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- select line modal-->
+    <div class="modal fade " id="chooseLine" tabindex="-1" role="dialog" aria-labelledby="select line" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="changePassword">Choose Line</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body miq-modal-body">
+            <div class="list-wrapper">
+              <ul class="d-flex flex-column todo-list todo-list-custom">
+
+                <li *ngFor="let line of lines">
+                  <div class="form-radio form-radio-flat">
+                    <label class="form-check-label">
+                      <input class="form-check-input" [value]="line.id" name="line" (change)="changeLine(line)" type="radio">
+                      {{line.name}}
+                      <i class="input-helper"></i></label>
+                  </div>
+                </li>
+
+            
+
+              </ul>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- search modal-->
+    <div class="modal fade" id="searchDialog" tabindex="-1" role="dialog" aria-labelledby="select line" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="changePassword">Search Waiting List</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body miq-modal-body">
+            <!-- <div class="add-items d-flex">
+                      
+                    </div> -->
+            <div class="add-items d-flex">
+              <input type="text" class="form-control todo-list-input" placeholder="Search" name="searchName"
+                [(ngModel)]="searchName">
+              <button class="add btn btn-miq-primary font-weight-bold search-btn" id="add-task" (click)="getQueueLine()">
+                <i class="fa fa-search" style="color:white"></i>
+              </button>
+            </div>
+            <div class="list-wrapper">
+
+              <ul class="d-flex flex-column todo-list todo-list-custom">
+
+                <li *ngFor="let queueLine of queueLines; let i=index;">
+                  <div class="form-radio form-radio-flat">
+                    <label class="form-check-label">
+                      <input  [disabled]="queueLine.on_hold==1 ? 'true': null " class="form-check-input" [value]="queueLine.id" name="queue" type="radio" (change)="changeQueue(queueLine, i)">
+                      {{queueLine.queue.name}} ({{this.helper.generateQueueNumber(queueLine.queue.id)}}) @ {{queueLine.position }} 
+                      <i class="input-helper"></i></label>
+                      <small *ngIf="queueLine.on_hold==1" style="color:red;font-style: italic;">(This queue is now serving in another line.)</small>
+                     
+                  </div>
+                </li>
+
+                <li *ngIf="queueLines.length <= 0">
+                  <div>No queue in the line.</div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- transfer modal-->
+    <div class="modal fade " id="transferDialog" tabindex="-1" role="dialog" aria-labelledby="transfer modal"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="changePassword">Transfer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body miq-modal-body">
+            <div class="col-md-12 card bg-secondary my-2">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="p-3">
+                    <h3>Name : {{processingCustomer.name}}</h3>
+                    <h4>Q Number : {{this.helper.generateQueueNumber(processingCustomer.id)}}</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12 card bg-secondary my-2">
+
+              <div class="row">
+
+
+                <div class="col-md-6">
+                  <div class="row">
+
+                    <div class="col-md-2">
+                      <button *ngIf="selectQueueLineId" (click)="upLine()" class="btn btn-miq-primary my-2 btn-md-square">UP</button>
+                      <button *ngIf="selectQueueLineId" (click)="downLine()" class="btn btn-miq-primary my-2 btn-md-square">DOWN</button>
+                      <button *ngIf="selectQueueLineId" (click)="removeLine()" class="btn btn-danger my-2 btn-md-square">DELETE</button>
+                    </div>
+
+                    <div class="col-md-8 line-box">
+                      <div class="p-3 h-100">
+                        <button class="btn btn-info btn-margin btn-block btn-line" 
+                          *ngFor="let qLine of processingCustomer.queue_lines; let i= index"  
+                          [class.border-red]="addSelectedQueueClass(qLine.id)"  [ngStyle] ="{'background-color': qLine.color  }"   (click)="selectQueueLine(qLine, i)">
+                          {{qLine.name}}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-2" *ngIf="selectedLine">
+                      <button class="btn btn-miq-primary my-2 btn-md-square" (click)="addLine()"> &lt; &lt;
+                      </button>
+                    </div>
+                    <div class="col-md-8 line-box">
+                      <div class="p-3 h-100">
+                        <button class="btn btn-primary btn-margin btn-block btn-line"  *ngFor="let line of lines"  (click)="selectLine(line)"
+                          [class.border-red]="addSelectedLineClass(line.id)"   [ngStyle] ="{'background-color': line.color  }">{{line.name}} </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

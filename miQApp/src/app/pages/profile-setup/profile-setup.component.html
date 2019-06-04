@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h4 class="card-title">My Profile Setup</h4>
+</div>
+
+    <div class="card px-3">
+      <div class="card-body">
+       
+        <form class="forms-sample" #profileForm="ngForm" (ngSubmit)="saveProfile(profileForm)">
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="name" placeholder="Enter your name" [(ngModel)]="user.name"
+                name="name" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" id="email" placeholder="Your Email" [(ngModel)]="user.email"
+                name="email" />
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="mobile" class="col-sm-3 col-form-label">Phone</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="retype-password" placeholder="Mobile Phone" [(ngModel)]="user.phone"
+                name="phone" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="old-password" class="col-sm-3 col-form-label">Current Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="old-password" name="current_password" [(ngModel)]="user.current_password" placeholder="Current Password" >
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="new-password" class="col-sm-3 col-form-label">New Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="new-password" placeholder="New Password" name="new_password"  [(ngModel)]="user.new_password">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="etype-password" class="col-sm-3 col-form-label">Confirm Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="retype-password" placeholder="Confirm Password" name="confirm_password" [(ngModel)]="user.confirm_password">
+            </div>
+          </div>
+
+           <div class="form-group">
+            <button type="submit" class="btn btn-miq-primary btn-md float-right btn-nav">
+              <i class="fa fa-save" style="font-size:2em; color:white"></i>
+              <span class="menu-title">Save</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

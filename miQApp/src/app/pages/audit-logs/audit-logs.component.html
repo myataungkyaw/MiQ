@@ -1,0 +1,74 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h4 class="card-title">Audit Logs</h4>
+</div>
+    <div class="card px-3">
+      <div class="card-body">
+        
+        <form action="" #searchForm="ngForm" (ngSubmit)="onSearchFormSubmit(searchForm)">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control search-input" name="category" [(ngModel)]="query.category" placeholder="Category"> -->
+                        <select class="form-control search-input" name="category" [(ngModel)]="query.category" id="category">
+                          <option value="">--Select Category-- </option>
+                          <option value="all">All</option>
+                          <option>Queue</option>
+                          <option>Company</option>
+                      </select>
+                    </div>
+                </div>
+    
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control" name="username" [(ngModel)]="query.username" placeholder="User Name"> -->
+                        <select class="form-control search-input" name="user_id" [(ngModel)]="query.user_id" id="user_id">
+                          <option value="">--Select User-- </option>
+                          <option value="0">All</option>
+                          <option *ngFor="let user of users" [value]="user.id">{{user.name}}</option>
+                      </select>
+                    </div>
+                </div>
+    
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <!-- <button class="btn btn-success mr-2">Search</button> -->
+                        <button class="add btn btn-miq-primary font-weight-bold search-btn" id="add-task">
+                          <i class="fa fa-search" style="color:white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <p class="text-center">
+            <img *ngIf="loading" src="assets/images/double_ring.gif" alt="" style="width:50px">
+        </p>
+            
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Category</th>
+              <th>User</th>
+              <th>Action</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let audit of audits">
+              <td>{{audit.id}}</td>
+              <td>{{audit.category}}</td>
+              <td>{{ audit.user ? audit.user.name : '-' }}</td>
+              <td>{{audit.action}}</td>
+              <td>{{audit.created_at}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div><!-- end of .card -->
+  </div>
+</div><!-- end of row -->

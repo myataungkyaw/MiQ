@@ -1,0 +1,184 @@
+
+<section >
+<div class="row" (dblclick)="openFullscreen()">
+   <div class="col-sm-12">
+
+      <h3  data-toggle="modal" data-target="#chooseLine" class="now-calling-header text-center">NOW SERVING</h3>
+
+   </div>
+
+  <div class="col-sm-4" style="padding-right:0px;padding-top:30px;">
+      
+              <table class="table table-bordered">
+                   <tr>
+                     <td style="width:50%;">
+                       <div class="line-grid grid_0" *ngIf="selectedLines[0]">
+                          <h5><span > {{ selectedLines[0].line_name }} </span></h5>
+                          <h5>{{ selectedLines[0].name }}</h5>
+
+                          <h3 class="blink_me">{{ selectedLines[0].call_number }}</h3>
+
+                       </div>
+                     </td>
+                     <td style="width:50%;">
+                        <div class="line-grid grid_1"  *ngIf="selectedLines[1]">
+                            <h5><span> {{ selectedLines[1].line_name }} </span></h5>
+                            <h5> {{ selectedLines[1].name }}</h5>
+                            <h3 class="blink_me">{{ selectedLines[1].call_number }}</h3>
+                         </div>
+                     </td>
+                   </tr>
+
+                   <tr>
+                      <td>
+                        <div class="line-grid grid_2" *ngIf="selectedLines[2]">
+                           <h5><span > {{ selectedLines[2].line_name }} </span></h5>
+                           <h5>{{ selectedLines[2].name }} </h5>
+                           <h3 class="blink_me">{{ selectedLines[2].call_number }}</h3>
+                        </div>
+                      </td>
+                      <td>
+                         <div class="line-grid grid_3" *ngIf="selectedLines[3]">
+                             <h5> <span > {{ selectedLines[3].line_name }} </span> </h5>
+                             <h5>{{ selectedLines[3].name }} </h5>
+                             <h3 class="blink_me">{{ selectedLines[3].call_number }}</h3>
+                          </div>
+                      </td>
+                    </tr>
+                    <tr>
+                        <td>
+                          <div class="line-grid grid_4" *ngIf="selectedLines[4]">
+                             <h5><span > {{ selectedLines[4].line_name }} </span></h5>
+                             <h5> {{ selectedLines[4].name }}</h5>
+                             <h3 class="blink_me">{{ selectedLines[4].call_number }}</h3>
+                          </div>
+                        </td>
+                        <td>
+                           <div class="line-grid grid_5"  *ngIf="selectedLines[5]">
+                               <h5><span> {{ selectedLines[5].line_name }} </span></h5>
+                               <h5>{{ selectedLines[5].name }}</h5>
+                               <h3 class="blink_me">{{ selectedLines[5].call_number }}</h3>
+                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                          <td>
+                            <div class="line-grid grid_6" *ngIf="selectedLines[6]">
+                               <h5><span > {{ selectedLines[6].line_name }} </span></h5>
+                               <h5> {{ selectedLines[6].name }}</h5>
+                               <h3 class="blink_me">{{ selectedLines[6].call_number }}</h3>
+                            </div>
+                          </td>
+                          <td>
+                             <div class="line-grid grid_7" *ngIf="selectedLines[7]">
+                                 <h5><span > {{ selectedLines[7].line_name }} </span></h5>
+                                 <h5>{{ selectedLines[7].name }}</h5>
+                                 <h3 class="blink_me">{{ selectedLines[7].call_number }}</h3>
+                              </div>
+                          </td>
+                        </tr>
+              </table>
+            
+  </div>
+  <div class="col-sm-7 main-grid" style="padding-left:20px;padding-right:20px;">
+      
+      <div class="now-calling">
+          <video
+             style="max-width:100%;background:#fff;"
+              id="my-player"
+              class="video-js"
+              controls
+              preload="auto"
+              aspectRatio="16:9"
+              height="420"
+              
+              data-setup='{"autoplay": true, "loop": true }'>
+
+            <!-- <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            <source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm">
+            <source src="//vjs.zencdn.net/v/oceans.ogv" type="video/ogg"> -->
+              <source src="assets/video/TomandJerry.mp4" type="video/mp4">
+              
+            
+          </video>
+
+      </div>
+
+      <table class="table table-bordered">
+        <tr>
+          <td rowspan="2" style="text-align:right;">Missed : </td>
+          <td><span *ngIf="no_shows[0]" class="missed">{{ no_shows[0].queue.queue_number }}</span></td>
+          <td><span *ngIf="no_shows[1]" class="missed">{{ no_shows[1].queue.queue_number }}</span></td>
+          <td><span *ngIf="no_shows[2]" class="missed">{{ no_shows[2].queue.queue_number }}</span></td>
+          <td><span *ngIf="no_shows[3]" class="missed">{{ no_shows[3].queue.queue_number }}</span></td>
+        </tr>
+        <tr>
+            <td><span class="missed"></span></td>
+            <td><span class="missed"></span></td>
+            <td><span class="missed"></span></td>
+            <td><span class="missed"></span></td>
+          </tr>
+      </table>
+
+      <div class="scrolling">
+          <marquee>{{ company.scrolling_text }}</marquee>
+      </div>
+      <hr>
+
+      <p  (click)="goFullScreen()" class="text-center py-1">{{ company.name }} - Powered by Excellent Queue</p>
+
+    </div>
+  
+</div>
+
+</section>
+  <!-- select line modal-->
+  <div class="modal fade in" id="chooseLine" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="select line" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="changePassword">Choose Lines to Display</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body miq-modal-body">
+            <div class="list-wrapper">
+              <ul class="d-flex flex-column todo-list todo-list-custom">
+
+                <li *ngFor="let line of lines">
+                  <div class="form-radio form-radio-flat">
+                    <label class="form-check-label">
+                      <input  type="checkbox"  class="form-check-input" disabled="true" >
+                      {{line.name}}
+                      <i class="input-helper"></i></label>
+
+                      <ul style="padding-left:20px;">
+                      <li *ngFor="let desk of line.line_desks">
+                          <div class="form-radio form-radio-flat">
+                            <label class="form-check-label">
+                              <input  type="checkbox"  value="{{ desk.id }}"  name="line[]"  [(ngModel)]="slines[desk.id]" class="form-check-input" >
+                              {{ desk.name }} 
+                              <i class="input-helper"></i></label>
+                          </div>
+                        </li>
+                      </ul>
+
+                  </div>
+                </li>
+
+          
+              </ul>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button (click)="chooseLines()" data-dismiss="modal"  class="btn btn-primary">Done</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- end of .modal -->
+
+    <audio  preload="metadata" *ngIf="company.notification_sound" src="{{ company.notification_sound }}"></audio>
+

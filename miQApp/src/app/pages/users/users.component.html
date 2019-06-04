@@ -1,0 +1,129 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h4 class="card-title">Users</h4>
+</div>
+    <div class="card px-3">
+      <div class="card-body">
+
+        <form action="" #searchForm="ngForm" (ngSubmit)="onSearchFormSubmit(searchForm)">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <!-- <a routerLink="/dashboard/add_user" class="btn btn-miq btn-miq-success mr-2">Add User</a> -->
+                <a routerLink="/dashboard/add_user" class="btn btn-miq btn-miq-primary mr-2">
+                  <i class="fa fa-plus" style="font-size:2em; color:white"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <input type="text" class="form-control search-input" name="category" [(ngModel)]="query.name" placeholder="Name">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <input type="text" class="form-control search-input" name="username" [(ngModel)]="query.email" placeholder="Email">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <input type="text" class="form-control search-input" name="username" [(ngModel)]="query.phone" placeholder="Phone">
+              </div>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="form-group">
+                <!-- <button class="btn-miq btn btn-success mr-2">Search</button> -->
+                <button class="add btn btn-miq-primary font-weight-bold search-btn" id="add-task">
+                  <i class="fa fa-search" style="color:white"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="row">
+          <div class="table-sorter-wrapper col-lg-12 table-responsive">
+            <table id="usertbl" class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="sortStyle">Name<i class="mdi mdi-chevron-down"></i></th>
+                  <th class="sortStyle">Email<i class="mdi mdi-chevron-down"></i></th>
+                  <th class="sortStyle">Phone<i class="mdi mdi-chevron-down"></i></th>
+                  <th class="sortStyle">User Role<i class="mdi mdi-chevron-down"></i></th>
+                  <th class="sortStyle">Action<i class="mdi mdi-chevron-down"></i></th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr *ngIf="loading">
+                  <td colspan="5">
+                    <img src="assets/images/index.rotate-spiral-spinner.svg" alt="" class="loadingImg" />
+                  </td>
+                </tr>
+
+                <tr *ngFor="let user of users">
+                  <td>{{user.name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.phone}}</td>
+                  <td>{{user.role}}</td>
+                  <td>
+                    <a routerLink="/dashboard/edit_user/{{user.id}}">Edit</a> &nbsp; /
+                    <a style="cursor: pointer;color:#007bff;" (click)="changePasswordDialog(user.id)">Reset Password</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- change password form -->
+        <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePassword"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <form id="changePasswordForm" action="" #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="changePassword">Change Password</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <div class="form-group">
+                    <label for="newPassword" class="col-form-label">New Password:</label>
+                    <input type="password" class="form-control" id="newPassword" name="newPassword" [(ngModel)]="changeUser.changePassword"
+                      required #newPassword="ngModel" />
+                    <div *ngIf="newPassword.invalid && (newPassword.dirty || newPassword.touched)" class="error-message">
+                      New password is required!
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newPassword" class="col-form-label">Confirm Password:</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" [(ngModel)]="changeUser.confirmPassword"
+                      required #confirmPassword="ngModel" />
+                    <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="error-message">
+                      Confirm password is required!
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">Change</button>
+                  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

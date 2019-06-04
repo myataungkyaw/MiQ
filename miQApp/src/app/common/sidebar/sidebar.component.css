@@ -1,0 +1,10 @@
+.nav-link {
+    cursor: pointer;
+    color: #fff;
+}
+
+.sidebar .nav .nav-item.active > .nav-link {
+    color:#fff;
+}
+
+.s{padding-right: 3rem !important;}

@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card px-3">
+      <div class="card-body">
+        <h4 class="card-title">Add New User</h4>
+        <form action="#" class="forms-sample" #userForm="ngForm" (ngSubmit)="saveUser(userForm)" method="POST">
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" placeholder="Name"
+                required #name="ngModel">
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+                Name is required!
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" placeholder="Email"
+                required email #email="ngModel" />
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                <div *ngIf="email.errors.required">
+                  Email is required!
+                </div>
+                <div *ngIf="email.errors.email">
+                  Email format is wrong!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Phone</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="user.phone" placeholder="Phone"
+                required #phone="ngModel" />
+              <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-message">
+                Phone is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="password" class="col-sm-3 col-form-label">Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password"
+                placeholder="Password" required #password="ngModel" />
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+                Password is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="confirm-password" class="col-sm-3 col-form-label">Conifrm Password</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" id="confirm-password" name="confirm_password" [(ngModel)]="user.confirm_password"
+                placeholder="Confirm Password" required #confirmPassword="ngModel" />
+              <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="error-message">
+                Confirm password is required!
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="role" class="col-sm-3 col-form-label">User Role</label>
+            <div class="col-sm-9">
+              <select class="form-control border-primary" id="role" name="role" [(ngModel)]="user.role">
+                <option *ngFor="let item of roles | keyvalue" [value]="item.key">{{item.value}}</option>
+              </select>
+              <!-- <div *ngIf="userRole.invalid && (userRole.dirty || userRole.touched)" class="error-message">
+                User role is required!
+              </div> -->
+            </div>
+          </div>
+          <!-- <button class="btn btn-miq-primary btn-lg float-right">
+            <i class="fa fa-save" style="font-size:2em; color:white"></i>
+          </button> -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-miq-primary btn-md float-right btn-nav">
+              <i class="fa fa-save" style="font-size:2em; color:white"></i>
+              <span class="menu-title">Save</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

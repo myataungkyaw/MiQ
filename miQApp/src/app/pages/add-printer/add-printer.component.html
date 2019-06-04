@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-md-12">
+      <div class="card px-3">
+        <div class="card-body">
+          <h4 class="card-title">Add New Printer</h4>
+          <form class="forms-sample" action="#" #printerForm="ngForm" (ngSubmit)="savePrinter(printerForm)" method="POST">
+            <div class="form-group row">
+              <label for="name" class="col-sm-3 col-form-label">Name</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="printer.name" placeholder="Name"
+                  required #name="ngModel">
+                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+                  Name is required!
+                </div>
+              </div>
+            </div>
+
+  
+            <div class="form-group row">
+              <label for="color" class="col-sm-3 col-form-label">Address</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="address"  name="address" [(ngModel)]="printer.address"
+                  required #address="ngModel">
+                <div *ngIf="address.invalid && (address.dirty || address.touched)" class="error-message">
+                  Address is required!
+                </div>
+              </div>
+            </div>
+  
+            
+              <div class="form-group">
+                <button type="submit" class="btn btn-miq-primary btn-md float-right btn-nav">
+                  <i class="fa fa-save" style="font-size:2em; color:white"></i>
+                  <span class="menu-title">Save</span>
+                </button>
+              </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

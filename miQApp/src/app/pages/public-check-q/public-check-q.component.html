@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-12">
+  <div class="card card-title text-center">
+    <h4 class="card-title">Check Q</h4>
+  </div>
+  
+      <div class="card px-3">
+        <div class="card-body">
+          <div class="add-items d-flex">
+            <input list="line_queues" type="text" class="form-control search-input" [(ngModel)]="searchName" placeholder="Enter Your Q Number and Press Search" (input)="onChooseQ(this)" />
+            <datalist id="line_queues" style="width:100%">
+                <option *ngFor="let q of all_queues" value="{{ q.name }}" >
+              </datalist>
+            <button class="add btn btn-miq-primary font-weight-bold search-btn" id="add-task" (click)="getQueue()">
+              <i class="fa fa-search" style="color:white"></i>
+            </button>
+          </div>
+  
+          <div class="list-wrapper">
+              <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+  
+                  <li *ngIf="queue.length>0">
+                    <div class="form-radio form-radio-flat">
+                      <label class="form-check-label">
+                        <!-- <input class="form-check-input" name="queue" type="radio"> -->
+                        <table class="table table-bordered" *ngIf="queue[0].queue_code">
+                           <tbody>
+                             <tr>
+                               <td>Queue Number</td>
+                               <td>{{queue[0].queue_code}}</td>
+                             </tr>
+                             <tr>
+                               <td> Name</td>
+                               <td> {{queue[0].name}}</td>
+                              </tr>
+                              <tr>
+                                <td> Phone </td>
+                               <td> {{ queue[0].phone }} </td>
+                             </tr>
+                           </tbody>
+                        </table>
+                        <i class="input-helper"></i></label>
+                    </div>
+                  </li>
+    
+                </ul>
+  
+            <table class="table table-striped tbl-q">
+  
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Line</th>
+                  <th>Position</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let queueLine of queueLines">
+                  <td>{{ queueLine.id }}</td>
+                  <td>{{queueLine.name}}</td>
+                  <td>{{queueLine.pivot.position}}</td>
+                  <td>{{queueLine.status}}</td>
+                </tr>
+              </tbody>
+  
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

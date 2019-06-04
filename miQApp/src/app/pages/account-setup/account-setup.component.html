@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h4 class="card-title">Account Setup</h4>
+</div>
+    <div class="card px-3">
+      <div class="card-body">
+        <form class="forms-sample" action="#" #accountSetup="ngForm" (ngSubmit)="saveCompany(accountSetup)" method="POST" enctype="multipart/form-data">
+
+          <div class="form-group row">
+            <label for="role" class="col-sm-3 col-form-label">Logs Retention Period</label>
+            <div class="col-sm-9">
+              <select class="form-control border-primary" id="log_retention_period" name="log_retention_period" [(ngModel)]="company.log_retention_period">
+                <option *ngFor="let item of logRetentionPeriods | keyvalue" [value]="item.key">{{item.value}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="profile" class="col-sm-3 col-form-label">Background Image</label>
+          
+            <div class="input-group col-sm-6">
+                <input type="file"  (change)="onBackgroundChoose($event)"   name="background_image"  class="form-control">
+              <!-- <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+              <div class="input-group-append">
+                <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+              </div> -->
+            </div>
+            <div class="input-group col-sm-3">
+              <img *ngIf="company.background_image"  src="{{ company.background_image }}" style="width:100px;height:100px;" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="profile" class="col-sm-3 col-form-label">Company Logo</label>
+           
+            <div class="input-group col-sm-6">
+                <input type="file"  (change)="onLogoChoose($event)"  name="logo"  class="form-control" />
+              <!-- <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Image">
+              <div class="input-group-append">
+                <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+              </div> -->
+            </div>
+            <div class="input-group col-sm-3">
+              <img *ngIf="company.logo"  src="{{ company.logo }}" style="width:100px;height:100px;" />
+            </div>
+
+          </div>
+
+          <div class="form-group row">
+              <label for="profile" class="col-sm-3 col-form-label">Notification Sound(.mp3)</label>
+              
+              <div class="input-group col-sm-6">
+                  <input type="file"  (change)="onNotiChoose($event)"  name="notification_sound" class="form-control" />
+                <!-- <input type="text" class="form-control file-upload-info" disabled placeholder="Upload MP3">
+                <div class="input-group-append">
+                  <button class="file-upload-browse btn btn-info" type="button">Upload</button>
+                </div> -->
+              </div>
+              <div class="input-group col-sm-3">
+       
+                <audio controls preload="metadata" *ngIf="company.notification_sound" src="{{ company.notification_sound }}"></audio>
+              </div>
+
+            </div>
+
+            <div class="form-group row">
+                <label for="profile" class="col-sm-3 col-form-label">Display Video</label>
+                
+                <div class="input-group col-sm-6">
+                    <input type="file"  (change)="onVideoChoose($event)"  name="display_video" class="form-control" />
+                </div>
+                <div class="input-group col-sm-3">
+         
+                </div>
+  
+              </div>
+
+
+          <div class="form-group row">
+            <label for="name" class="col-sm-3 col-form-label">Company Name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="name" name="name"  [(ngModel)]="company.name" placeholder="Company Name">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="address" class="col-sm-3 col-form-label">Company Address</label>
+            <div class="col-sm-9">
+              <textarea type="text" class="form-control" id="address" name="address" [(ngModel)]="company.address" placeholder="Company Address"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="queue_prefix" class="col-sm-3 col-form-label">Queue Prefix</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="queue_prefix" name="queue_prefix" [(ngModel)]="company.queue_prefix" placeholder="Queue Prefix">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="note" class="col-sm-3 col-form-label">Note</label>
+            <div class="col-sm-9">
+                <textarea type="text" class="form-control" id="note" name="note" [(ngModel)]="company.note"  placeholder="Note"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="scrolling_text" class="col-sm-3 col-form-label">Scrolling Text</label>
+            <div class="col-sm-9">
+                <textarea type="text" class="form-control" id="scrolling_text" name="scrolling_text" [(ngModel)]="company.scrolling_text"  placeholder="Scrolling Text"></textarea>
+            </div>
+          </div>
+
+          <!-- <div class="form-group row"> -->
+          <!-- <label for="user-role" class="col-sm-3 col-form-label">&nbsp;</label>
+                      <div class="col-sm-9"> -->
+          <!-- <button type="submit" class="btn btn-success mr-2">Save</button> -->
+          <!-- </div> -->
+          <!-- </div> -->
+          <!-- <button class="btn btn-miq-primary btn-lg float-right">
+            <i class="fa fa-save" style="font-size:2em; color:white"></i>
+          </button> -->
+          <div class="form-group">
+            <button type="submit" class="btn btn-miq-primary btn-md float-right btn-nav">
+              <i class="fa fa-save" style="font-size:2em; color:white"></i>
+              <span class="menu-title">Save</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

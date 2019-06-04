@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title">
+<h3 class="text-center">Welcome to {{companyName}} </h3>
+<h5 class="text-center">Please select your service to use.</h5>
+</div>
+
+    <div class="card px-3">
+      <div class="card-body">
+
+      
+
+        <form action="#" #issueForm="ngForm" (ngSubmit)="saveIssue(issueForm)" method="POST">
+
+            <div class="form-group">
+                <select name="printer" id="printer" [(ngModel)]="issue.printer"  class="form-control" placeholder="Choose a Printer">
+                  <option value="">Choose a Printer</option>
+                  <option *ngFor="let printer of printers" value="{{ printer.id }}">{{ printer.name }}</option>
+                </select>
+              </div>
+
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="name" [(ngModel)]="issue.name" placeholder="Name" required />
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="phone" [(ngModel)]="issue.phone" placeholder="Phone Number" required />
+          </div>
+
+          <div class="form-group">
+            <input type="text" class="form-control" name="third_party_code" [(ngModel)]="issue.third_party_code"
+              placeholder="Third Party Code" />
+          </div>
+
+          <div class="form-group">
+
+              <div class="accordion" id="accordion" role="tablist">
+                   
+                  <div class="card"  *ngFor="let tag of tags; let j=index;">
+                    <div class="card-header" role="tab" id="heading{{ j }}"  *ngIf="tagged[tag.name]">
+                      <h6 class="mb-0">
+                        <a data-toggle="collapse" href="#collapse{{ j }}" aria-expanded="true" >
+                          {{ tag.name }}
+                        </a>
+                      </h6>
+                    </div>
+                    <div *ngIf=" tagged[tag.name]" id="collapse{{ j }}"  class='{{ j == 0 ? "collapse show" : "collapse" }}' role="tabpanel"  data-parent="#accordion">
+                      <div class="card-body">
+
+                          <div class="form-check form-check-flat" *ngFor="let line of  tagged[tag.name]; let i=index;">
+                              <i class="input-helper"></i>
+                                <label>
+                                  <input type="checkbox" name="sline[]" [(ngModel)]="sline[line.id+j]">
+                                  {{line.name}} ({{ line.line_queues.length }} waiting)
+                                </label>
+                              </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+
+
+
+</div><!-- end of .accordion -->
+
+
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-miq-primary btn-md float-right btn-nav">
+              <i class="fa fa-save" style="font-size:2em; color:white"></i>
+              <span class="menu-title">Save</span>
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div><!-- end of .card -->
+
+  </div>
+</div>

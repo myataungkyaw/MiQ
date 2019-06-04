@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h4 class="card-title">Lines</h4>
+</div>
+    <div class="card px-3">
+      <div class="card-body">
+        <!-- <a routerLink="/dashboard/add_line" class="btn btn-success mr-2">Add Line</a> -->
+        <a  *ngIf="total_desks < 10"  routerLink="/dashboard/add_line" class="btn btn-miq btn-miq-primary mr-2">
+          <i class="fa fa-plus" style="font-size:2em; color:white"></i>
+        </a>
+        <p class="text-center"> {{ total_desks }} / 10 desks created!</p>
+        <!-- <h4 class="card-title">Data table</h4> -->
+        <div class="row">
+          <div class="col-12">
+            <div class="table-responsive">
+              <table id="linetbl" class="table">
+                <thead>
+                  <tr>
+                    <th>Name </th>
+                    <th>Color</th>
+                    <th>Priority</th>
+                    <th>No of Desks</th>
+                    <th>Tags</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let line of lines">
+                    <td>{{ line.name }}</td>
+                    <td><label class="badge" style="width:50px;" [style.background-color]="line.color">&nbsp;</label></td>
+                    <td>{{ line.priority }}</td>
+                    <td>{{ line.line_desks.length }}</td>
+                    <td>{{ line.tags }}</td>
+                    <td>
+                      <a routerLink="/dashboard/edit_line/{{line.id}}">Edit</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

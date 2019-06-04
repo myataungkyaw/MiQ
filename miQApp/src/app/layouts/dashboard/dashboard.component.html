@@ -1,0 +1,28 @@
+<div class="container-scroller">
+  <!-- partial:../../partials/_navbar.html -->
+  <app-header></app-header>
+
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper dashboard-body-wrapper">
+    <div class="row row-offcanvas row-offcanvas-right">
+      <!-- partial:../../partials/_settings-panel.html -->
+
+      <!-- partial:../../partials/_sidebar.html -->
+      <app-sidebar></app-sidebar>
+
+      <!-- partial -->
+      <div class="content-wrapper dashboard-content">
+
+        <router-outlet></router-outlet>
+
+      </div>
+      <!-- content-wrapper ends -->
+      <!-- partial:../../partials/_footer.html -->
+
+    </div>
+    <!-- row-offcanvas ends -->
+  </div>
+  <app-footer></app-footer>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->

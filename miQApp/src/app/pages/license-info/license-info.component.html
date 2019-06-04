@@ -1,0 +1,56 @@
+
+<div class="row">
+  <div class="col-md-12">
+<div class="card card-title text-center">
+  <h4 class="card-title">License Info</h4>
+</div>
+      <div class="card px-3">
+          <div class="card-body">
+              <form class="forms-sample" action="" method="POST">
+                <section *ngIf="company.license">
+                  <div class="form-group row">
+                      <label for="username" class="col-sm-3 col-form-label">Machine Id:</label>
+                      <div class="col-sm-9">
+                      123******122324
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label for="username" class="col-sm-3 col-form-label">License:</label>
+                      <div class="col-sm-9" style="color:#00c292">
+                          Valid (Expire on 12/Dec/2019)
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label for="username" class="col-sm-3 col-form-label">No of line:</label>
+                      <div class="col-sm-9" style="color:#00c292">
+                      5
+                      </div>
+                  </div>
+
+                </section>
+
+                <section *ngIf="!company.license">
+                    <p class="alert alert-danger">You have no valid license.</p>
+                </section>
+
+                <div class="form-group row">
+                        <label for="username" class="col-sm-3 col-form-label">Update license:</label>
+                        <div class="col-sm-9">
+                            <!-- <button type="submit" class="btn btn-success mr-2">Upload</button> -->
+                            <label>
+                            <input type="file" id="license" name="license" />
+                            <button class="btn btn-miq-primary" >
+                              <i class="fa fa-upload" style="font-size:2em; color:white"></i>
+                            </button>
+                           </label>
+                        </div>
+                </div>
+
+                  
+              </form>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav nav-primary sidemenu">
+      <li class="nav-item nav-profile">
+        <div class="nav-link">
+          <!-- <div class="profile-image">
+            <img src="./images/faces/face10.jpg" alt="image"/>
+            <span class="online-status online"></span> 
+          </div> -->
+          <div class="profile-name">
+            <p class="name">
+              {{ this.auth.getLoggedInUser().name }}
+            </p>
+            <p class="designation">
+              
+            </p>
+          </div>
+        </div>
+      </li>
+      
+     
+
+      <li class="nav-item">
+        <a class="nav-link icon-white" routerLink="/dashboard">
+          <i class="icon-calendar menu-icon"></i>
+          <span class="menu-title">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="loggedInUser.role == 2 || loggedInUser.role == 1">
+        <a class="nav-link icon-white" routerLink="data_insight">
+          <i class="icon-picture menu-icon"></i>
+          <span class="menu-title">Data Insight</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link icon-white" routerLink="/display_setup" target="_blank">
+          <i class="icon-screen menu-icon"></i>
+          <span class="menu-title">Display Setup</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link icon-white"  (click)="logout()">
+          <i class="icon-user menu-icon"></i>
+          <span class="menu-title">Logout</span>
+        </span>
+      </li>
+      
+      
+    </ul>
+  </nav>

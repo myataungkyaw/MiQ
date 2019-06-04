@@ -1,0 +1,18 @@
+.loadingImg {
+   margin: 0px auto;
+   width: 80px;
+   height: 80px;
+}
+.search-input{
+   font-size:18px;
+   height: 50px;
+}
+
+.search-btn{
+   font-size:25px;
+   padding:0;
+   width:55px;
+   height:50px;
+   text-align:center;
+}
+

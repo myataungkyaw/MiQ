@@ -1,0 +1,19 @@
+<div class="card px-3">
+  <div class="card-body">
+
+    <div class="row dashboard-section my-2 py-3 nav-btns">
+
+      <div class="col-lg-2 col-md-3 col-sm-4 text-center my-2" *ngFor="let company of userCompanies">
+        <div class="btn-nav" >
+          <a class="btn btn-lg" (click)="chooseCompany(company)" style="padding-top:10px;">
+            <img *ngIf="!company.logo" src="assets/images/logo-placeholder.jpg" alt="" style="height:80px;">
+            <img *ngIf="company.logo" src="{{ company.logo }}" alt="" style="height:80px;">
+            <span class="menu-title">{{company.name}}</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
